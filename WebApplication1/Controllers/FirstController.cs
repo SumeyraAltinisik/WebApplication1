@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -12,6 +13,17 @@ namespace WebApplication1.Controllers
         {
             ViewBag.Selam = "Naber";
             return View();
+        }
+        public IActionResult Info()
+        {
+            Person person = new()
+            {
+                Name = "John",
+                Age = 18,
+                Location = "United States"
+            };
+                return View(person);
+            
         }
     }
 }
