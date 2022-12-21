@@ -41,5 +41,13 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult Delete(string empname)
+        {
+            Employee employee = Repository.AllEmpoyees.Where(e => e.Name == empname).FirstOrDefault();
+            Repository.Delete(employee);
+            return RedirectToAction("Index");
+        }
     }
 }
