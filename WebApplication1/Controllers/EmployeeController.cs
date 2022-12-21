@@ -19,8 +19,13 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Create(Employee employee)
         {
-            Repository.Create(employee);
+            if (ModelState.IsValid)
+            {
+                Repository.Create(employee);
             return View("Thanks", employee);
+            }
+            else
+                return View();
         }
 
         public IActionResult Update(string empname)
@@ -32,7 +37,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Update(Employee employee, string empname)
         {
-            Employee e = Repository.AllEmpoyees.FirstOrDefault(b=>b.Name==empname);
+            if (ModelState.IsValid)
+            {
+                Employee e = Repository.AllEmpoyees.FirstOrDefault(b=>b.Name==empname);
             e.Age = employee.Age;
             e.Salary = employee.Salary;
             e.Department = employee.Department;
@@ -40,6 +47,9 @@ namespace WebApplication1.Controllers
             e.Name = employee.Name;
 
             return RedirectToAction("Index");
+            }
+            else
+                return View();
         }
 
         [HttpPost]
